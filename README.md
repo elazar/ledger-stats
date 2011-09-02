@@ -47,4 +47,3 @@ The following dependencies are bundled with ledger stats:
 
 Note that Highcharts is _not_ free for commercial use. For more information, 
 refer to its [licensing terms](http://www.highcharts.com/license).
-Note: 
