@@ -105,8 +105,12 @@ function get_postings($ledger, $file)
     static $postings = array();
 
     if (!isset($postings[$file])) {
-        $cmd = $ledger . ' xml expenses liabilities -f ' . $file;
-        $output = shell_exec($cmd);
+        if (strpos($file, '.xml') !== false) {
+            $output = file_get_contents($file);
+        } else {
+            $cmd = $ledger . ' xml -f ' . $file;
+            $output = shell_exec($cmd);
+        }
         $xml = simplexml_load_string($output);
         $postings[$file] = array();
         foreach ($xml->transactions->transaction as $transaction) {
