@@ -111,36 +111,31 @@ LedgerStats = {
 
 function get_postings($ledger, $file)
 {
-    static $postings = array();
-
-    if (!isset($postings[$file])) {
-        if (strpos($file, '.xml') !== false) {
-            $output = file_get_contents($file);
-        } else {
-            $cmd = $ledger . ' xml -f ' . $file;
-            $output = shell_exec($cmd);
-        }
-        $xml = simplexml_load_string($output);
-        $postings[$file] = array();
-        foreach ($xml->transactions->transaction as $transaction) {
-            $date = (string) $transaction->date;
-            foreach ($transaction->posting as $posting) {
-                $account = (string) $posting->account->name;
-                $amount = (float) $posting->{'post-amount'}->amount->quantity;
-                $postings[$file][] = (object) array(
-                    'date' => $date,
-                    'account' => $account,
-                    'amount' => $amount,
-                );
-            }
-        }
-        // There appears to be a bug in ledger xml where it duplicates a
-        // transaction if that transaction contains more than two postings
-        // (one debit, one credit)
-        $postings[$file] = array_unique($postings[$file], SORT_REGULAR);
+    if (strpos($file, '.xml') !== false) {
+        $output = file_get_contents($file);
+    } else {
+        $cmd = $ledger . ' xml -f ' . $file;
+        $output = shell_exec($cmd);
     }
-
-    return $postings[$file];
+    $xml = simplexml_load_string($output);
+    $postings = array();
+    foreach ($xml->transactions->transaction as $transaction) {
+        $date = (string) $transaction->date;
+        foreach ($transaction->posting as $posting) {
+            $account = (string) $posting->account->name;
+            $amount = (float) $posting->{'post-amount'}->amount->quantity;
+            $postings[] = (object) array(
+                'date' => $date,
+                'account' => $account,
+                'amount' => $amount,
+            );
+        }
+    }
+    // There appears to be a bug in ledger xml where it duplicates a
+    // transaction if that transaction contains more than two postings
+    // (one debit, one credit)
+    $postings = array_unique($postings, SORT_REGULAR);
+    return $postings;
 }
 
 function get_accounts(array $postings)
