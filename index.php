@@ -150,6 +150,7 @@ function get_postings($ledger, $file)
 
 function get_accounts(array $postings)
 {
+    $accounts = array();
     foreach ($postings as $posting) {
         $accounts[$posting->account] = true;
     }
