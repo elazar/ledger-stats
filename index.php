@@ -84,7 +84,7 @@ LedgerStats = {
 <?php
 
     if ($_GET) {
-        $postings = search_postings($config['ledger'], $config['file'], $_GET);
+        $postings = search_postings(get_postings($config['ledger'], $config['file']), $_GET);
         foreach (glob('plugins/*.php') as $plugin) {
             $callback = include $plugin;
             if (is_callable($callback)) {
@@ -140,10 +140,8 @@ function get_accounts(array $postings)
     return $accounts;
 }
 
-function search_postings($ledger, $file, $filters)
+function search_postings(array $postings, $filters)
 {
-    $postings = get_postings($ledger, $file);
-
     if (!empty($filters['amount-from']) && is_numeric($filters['amount-from'])) {
         $from = $filters['amount-from'];
         $postings = array_filter($postings, function($posting) use ($from) {
