@@ -14,10 +14,11 @@ contains.
 
 ## Configuration
 
-`config.php` contains a default set of configuration settings that can be
+`config.sample.php` contains a sample set of configuration settings that can be
 modified to suit your preferences. Each setting is documented to indicate the
-purpose of its value. In particular, the `file` setting must be set to the 
-path of a data file in the ledger format that ledger stats will query. 
+purpose of its value. In particular, the `file` setting must be set to the
+paths of one or more data files in the standard ledger or ledger XML formats
+that ledger stats will query. 
 
 ## Usage
 
