@@ -44,3 +44,6 @@ The following dependencies are bundled with ledger stats:
 - [jQuery](http://jquery.com) 1.6.2
 - [jQuery UI](http://jqueryui.com) 1.8.16
 - [Highcharts](http://highcharts.com) 2.1.6
+
+Note that Highcharts is _not_ free for commercial use. For more information, 
+refer to its [licensing terms](http://www.highcharts.com/license).
