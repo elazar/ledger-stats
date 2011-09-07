@@ -22,11 +22,12 @@ path of a data file in the ledger format that ledger stats will query.
 ## Usage
 
 Optionally enter in a beginning or ending date or amount or one or more
-accounts to include or exclude. If no accounts are specified, all accounts are
-included by default. To exclude an account, prefix an account name with a
-hyphen (`-`). Begin typing a portion of an account name to have it
-autocomplete. When you've entered all desired criteria, submit the form to see
-visualizations of the data provided by plugins.
+accounts to include or exclude. Account names must be comma-separated. If no
+accounts are specified, all accounts are included by default. To exclude an
+account, prefix an account name with a hyphen (`-`). Begin typing a portion of
+an account name to have it autocomplete. When you've entered all desired
+criteria, submit the form to see visualizations of the data provided by
+plugins.
 
 ## Plugins
 
