@@ -77,8 +77,9 @@ return function($postings) {
                         echo ",\n";
                     endif;
                     $first = false;
+                    $strtotime = strtotime($date);
                 ?>
-                [ Date.UTC(<?php echo date('Y, n, j', strtotime($date)); ?>), <?php echo $amount; ?> ]<?php
+                [ Date.UTC(<?php echo date('Y, ', $strtotime), date('n', $strtotime)-1, date(', j', $strtotime); ?>), <?php echo $amount; ?> ]<?php
                 endforeach;
                 ?>
 
