@@ -16,10 +16,11 @@ return function($postings) {
         $data[$posting->account][$posting->date] += $posting->amount;
     }
 
-    foreach ($data as $account => $account_data) {
+    foreach ($data as $account => &$account_data) {
         $total = 0;
+        uksort($account_data, function($a, $b) { return strtotime($a) - strtotime($b); });
         foreach ($account_data as $date => $amount) {
-            $data[$account][$date] = $total + $amount;
+            $account_data[$date] = $total + $amount;
             $total += $amount;
         }
     }
