@@ -121,6 +121,10 @@ function get_postings($ledger, $file)
                 );
             }
         }
+        // There appears to be a bug in ledger xml where it duplicates a
+        // transaction if that transaction contains more than two postings
+        // (one debit, one credit)
+        $postings[$file] = array_unique($postings[$file], SORT_REGULAR);
     }
 
     return $postings[$file];
