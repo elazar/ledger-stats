@@ -12,6 +12,7 @@ return function($postings) {
         }
         $data[$month][$posting->account] += $posting->amount;
     }
+    uksort($data, function($a, $b) { return strtotime($a) - strtotime($b); });
 
     $accounts = get_accounts($postings);
     $data_by_account = array();
