@@ -1,6 +1,6 @@
 <?php
 
-return function($postings) {
+return function($postings, $config) {
     $data = array();
     $min = 0;
     foreach ($postings as $posting) {

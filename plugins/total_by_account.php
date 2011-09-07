@@ -1,6 +1,6 @@
 <?php
 
-return function($postings) {
+return function($postings, $config) {
     $data = array();
     foreach ($postings as $posting) {
         if (!isset($data[$posting->account])) {

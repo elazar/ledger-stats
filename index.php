@@ -117,8 +117,15 @@ LedgerStats = {
         }
         foreach ($plugins as $plugin) {
             $callback = include $plugin;
+            $plugin_config = array();
+            foreach ($config as $key => $value) {
+                $prefix = preg_replace('#^plugins/(.*)\.php$#', '$1', $plugin) . '.';
+                if (strpos($key, $prefix) === 0) {
+                    $plugin_config[str_replace($prefix, '', $key)] = $value;
+                }
+            }
             if (is_callable($callback)) {
-                call_user_func($callback, $postings);
+                call_user_func($callback, $postings, $plugin_config);
             }
         }
     }

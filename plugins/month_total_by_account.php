@@ -1,6 +1,6 @@
 <?php
 
-return function($postings) {
+return function($postings, $config) {
     $data = array();
     foreach ($postings as $posting) {
         $month = date('Y-M', strtotime($posting->date));
@@ -52,7 +52,9 @@ return function($postings) {
     var chart = new Highcharts.Chart({
         chart: {
             renderTo: "month_total_by_account",
-            defaultSeriesType: "bar"
+            defaultSeriesType: "bar",
+            zoomType: "xy"<?php if (isset($config['height'])): ?>,
+            height: <?php echo json_encode($config['height']); endif; ?>
         },
         title: {
             text: "Monthly Total by Account"
