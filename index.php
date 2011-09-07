@@ -9,10 +9,19 @@ $error = false;
 if (!isset($config['file'])) {
     $url = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['SCRIPT_NAME'];
     $error = 'Please specify the path to a ledger XML file using the "file" configuration setting.';
-} elseif (!is_readable($config['file'])) {
-    $error = 'The file specified in the "file" configuration setting does not exist or cannot be read.';
-} elseif (!get_postings($config['ledger'], $config['file'])) {
-    $error = 'No transactions were found in the file specified in the "file" configuration setting.';
+} else {
+    $files = is_array($config['file']) ? $config['file'] : array($config['file']);
+    if (!array_filter($config['file'], 'is_readable')) {
+        $error = 'Files specified in the "file" configuration setting do not exist or cannot be read.';
+    } else {
+        $postings = array();
+        foreach ($files as $file) {
+            $postings = array_merge($postings, get_postings($config['ledger'], $file));
+        }
+        if (!$postings) {
+            $error = 'No transactions were found in the file specified in the "file" configuration setting.';
+        }
+    }
 }
 
 ?>
@@ -71,7 +80,7 @@ Filter by date range:
 
 <script type="text/javascript">
 LedgerStats = {
-    accounts: <?php echo json_encode(get_accounts(get_postings($config['ledger'], $config['file']))); ?>,
+    accounts: <?php echo json_encode(get_accounts($postings)); ?>,
     accountLimit: <?php echo isset($config['accountLimit']) ? $config['accountLimit'] : 10; ?>
 };
 </script>
@@ -84,7 +93,7 @@ LedgerStats = {
 <?php
 
     if ($_GET) {
-        $postings = search_postings(get_postings($config['ledger'], $config['file']), $_GET);
+        $postings = search_postings($postings, $_GET);
         foreach (glob('plugins/*.php') as $plugin) {
             $callback = include $plugin;
             if (is_callable($callback)) {
