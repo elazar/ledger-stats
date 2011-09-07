@@ -104,7 +104,18 @@ LedgerStats = {
 
     if ($_GET) {
         $postings = filter_postings($postings, $_GET);
-        foreach (glob('plugins/*.php') as $plugin) {
+
+        $plugins = array();
+        if (isset($config['plugin']) && is_array($config['plugin'])) {
+            $plugins = array_map(function($plugin) {
+                return 'plugins/' . $plugin . '.php';
+            }, $config['plugin']);
+            $plugins = array_filter($plugins, 'is_readable');
+        }
+        if (!$plugins) {
+            $plugins = glob('plugins/*.php');
+        }
+        foreach ($plugins as $plugin) {
             $callback = include $plugin;
             if (is_callable($callback)) {
                 call_user_func($callback, $postings);

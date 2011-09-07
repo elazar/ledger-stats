@@ -36,4 +36,24 @@ $config['file'] = '/path/to/file';
  */
 $config['accountLimit'] = 10;
 
+/**
+ * Array containing one or more short names for plugins to include in ledger
+ * stats output. If none are specified, all plugins in the plugins directory
+ * are used.
+ *
+ * Example:
+ *
+ * $config['plugin'] = array(
+ *     'account_total_by_date',
+ *     'month_total_by_account',
+ *     'total_by_account',
+ * );
+ */
+$config['plugin'] = array(
+    'account_total_by_date',
+    'month_total_by_account',
+    'total_by_account',
+    'total_by_date',
+);
+
 return $config;
