@@ -11,7 +11,7 @@ if (!isset($config['file'])) {
     $error = 'Please specify the path to a ledger XML file using the "file" configuration setting.';
 } else {
     $files = is_array($config['file']) ? $config['file'] : array($config['file']);
-    if (!array_filter($config['file'], 'is_readable')) {
+    if (!array_filter($files, 'is_readable')) {
         $error = 'Files specified in the "file" configuration setting do not exist or cannot be read.';
     } else {
         $postings = array();
