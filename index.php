@@ -68,6 +68,16 @@ Filter by date range:
 <textarea name="accounts" id="accounts" rows="4" cols="40"><?php echo isset($_GET['accounts']) ? htmlentities($_GET['accounts']) : ''; ?></textarea>
 </div>
 
+<div id="depth-filter">
+<label for="depth">Limit depth:</label>
+<select name="depth" id="depth">
+    <option value="">No limit</option>
+<?php foreach (range(1, 10) as $depth): ?>
+    <option value="<?php echo $depth; ?>"<?php if (!empty($_GET['depth']) && $_GET['depth'] == $depth): ?> selected="selected"<?php endif; ?>><?php echo $depth; ?></option>
+<?php endforeach; ?>
+</select>
+</div>
+
 <input type="submit" value="Submit">
 
 </form>
@@ -150,6 +160,19 @@ function get_accounts(array $postings)
 
 function filter_postings(array $postings, $filters)
 {
+    if (!empty($filters['depth']) && ctype_digit($filters['depth'])) {
+        $depth = max($filters['depth'], 1);
+        $postings = array_map(function($posting) use ($depth) {
+            $pattern = '((?:[^:]+)';
+            if ($depth > 1) {
+                $pattern .= '(?::[^:]+){' . max(1, $depth - 1) . '}';
+            }
+            $pattern .= ').*';
+            $posting->account = preg_replace('/' . $pattern . '/', '$1', $posting->account);
+            return $posting;
+        }, $postings);
+    }
+
     if (!empty($filters['amount-from']) && is_numeric($filters['amount-from'])) {
         $from = $filters['amount-from'];
         $postings = array_filter($postings, function($posting) use ($from) {
