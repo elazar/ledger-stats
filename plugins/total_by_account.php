@@ -16,6 +16,7 @@ return function($postings) {
     if ($diff = $total - array_sum($data)) {
         $data['Other'] = $diff;
     }
+    asort($data);
 
 ?>
 <div id="total_by_account"></div>
