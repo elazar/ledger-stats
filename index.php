@@ -71,7 +71,7 @@ Filter by date range:
 
 <script type="text/javascript">
 LedgerStats = {
-    accounts: <?php echo json_encode(get_accounts($config['ledger'], $config['file'])); ?>,
+    accounts: <?php echo json_encode(get_accounts(get_postings($config['ledger'], $config['file']))); ?>,
     accountLimit: <?php echo isset($config['accountLimit']) ? $config['accountLimit'] : 10; ?>
 };
 </script>
@@ -126,18 +126,13 @@ function get_postings($ledger, $file)
     return $postings[$file];
 }
 
-function get_accounts($ledger, $file)
+function get_accounts(array $postings)
 {
-    static $accounts = null;
-
-    if (!$accounts) {
-        foreach (get_postings($ledger, $file) as $posting) {
-            $accounts[$posting->account] = true;
-        }
-        $accounts = array_keys($accounts);
-        sort($accounts);
+    foreach ($postings as $posting) {
+        $accounts[$posting->account] = true;
     }
-
+    $accounts = array_keys($accounts);
+    sort($accounts);
     return $accounts;
 }
 
