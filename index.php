@@ -100,6 +100,8 @@ LedgerStats = {
 <script type="text/javascript" src="js/jquery-ui/js/jquery-ui-1.8.16.custom.min.js"></script>
 <script type="text/javascript" src="js/ledger-stats.js"></script>
 
+<div id="tabs">
+    <ul>
 <?php
 
     if ($_GET) {
@@ -115,11 +117,32 @@ LedgerStats = {
         if (!$plugins) {
             $plugins = glob('plugins/*.php');
         }
-        foreach ($plugins as $plugin) {
-            $callback = include $plugin;
+        $plugins = array_combine(array_map(function($plugin) {
+            return preg_replace('#^plugins/(.*)\.php$#', '$1', $plugin);
+        }, $plugins), $plugins);
+
+        foreach ($plugins as $plugin_name => $plugin_file) {
+
+?>
+        <li><a href="#<?php echo htmlentities($plugin_name, ENT_QUOTES); ?>-tab"><?php echo htmlentities(ucfirst(preg_replace('/\\_([a-z])/e', '" " . strtoupper("$1")', $plugin_name)), ENT_QUOTES); ?></a></li>
+<?php
+
+        }
+
+?>
+    </ul>
+<?php
+
+        foreach ($plugins as $plugin_name => $plugin_file) {
+
+?>
+    <div id="<?php echo htmlentities($plugin_name, ENT_QUOTES); ?>-tab">
+<?php
+
+            $callback = include $plugin_file;
             $plugin_config = array();
             foreach ($config as $key => $value) {
-                $prefix = preg_replace('#^plugins/(.*)\.php$#', '$1', $plugin) . '.';
+                $prefix = $plugin_name . '.';
                 if (strpos($key, $prefix) === 0) {
                     $plugin_config[str_replace($prefix, '', $key)] = $value;
                 }
@@ -127,11 +150,23 @@ LedgerStats = {
             if (is_callable($callback)) {
                 call_user_func($callback, $postings, $plugin_config);
             }
+
+?>
+    </div>
+<?php
+
         }
     }
 
 ?>
 <?php endif; ?>
+</div>
+
+<script type="text/javascript">
+(function($) {
+    $("#tabs").tabs();
+})(jQuery);
+</script>
 
 </body>
 </html>

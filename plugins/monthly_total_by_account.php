@@ -57,7 +57,7 @@ return function($postings, $config) {
             height: <?php echo json_encode($config['height']); endif; ?>
         },
         title: {
-            text: "Monthly Total by Account"
+            text: null,
         },
         xAxis: {
             categories: <?php echo json_encode(array_keys($data)); ?>
