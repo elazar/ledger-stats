@@ -35,6 +35,13 @@ if (!isset($config['file'])) {
 </head>
 <body>
 
+<div id="about" style="position: absolute; top: 0; left: 10px;">
+<h1>About this Demo</h1>
+<p style="width: 250px; text-align: left;"><a href="https://github.com/peterkeen/Ledger-Tools-Demo/blob/master/stan.txt" title="stan.txt at master from peterkeen/Ledger-Tools-Demo - GitHub">stan.txt</a> from <a href="https://github.com/peterkeen/Ledger-Tools-Demo" title="peterkeen/Ledger-Tools-Demo - GitHub">Ledger-Tools-Demo</a> by <a href="https://github.com/peterkeen" title="peterkeen's Profile - GitHub">peterkeen</a> is used as the data source for the demo at the suggestion of <a href="https://twitter.com/#!/SamStuck" title="Sam Stuck (SamStuck) on Twitter">@SamStuck</a> and <a href="https://twitter.com/#!/zrail" title="zrail (zrail) on Twitter">@zrail</a>. I owe all of them my thanks.</p>
+</div>
+
+<a href="http://github.com/elazar/ledger-stats"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://a248.e.akamai.net/assets.github.com/img/7afbc8b248c68eb468279e8c17986ad46549fb71/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub"></a>
+
 <div id="container">
 
 <h1>ledger stats</h1>
