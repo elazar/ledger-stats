@@ -72,7 +72,7 @@ Filter by date range:
 
 <div id="account-filter">
 <label for="accounts">Filter by account:</label>
-<textarea name="accounts" id="accounts" rows="4" cols="40"><?php echo isset($_GET['accounts']) ? htmlentities($_GET['accounts']) : ''; ?></textarea>
+<textarea name="accounts" id="accounts" rows="4" cols="40"><?php echo isset($_GET['accounts']) ? htmlentities($_GET['accounts']) : 'Expenses'; ?></textarea>
 </div>
 
 <div id="depth-filter">
