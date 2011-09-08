@@ -14,16 +14,17 @@ It uses [stan.txt](https://github.com/peterkeen/Ledger-Tools-Demo/blob/master/st
 ## Installation
 
 Simply place the `ledger-stats` directory in a publicly accessible location
-within your web server's document root and access the `index.php` file it 
+within your web server's document root and access the `index.php` file it
 contains.
 
 ## Configuration
 
-`config.sample.php` contains a sample set of configuration settings that can be
-modified to suit your preferences. Each setting is documented to indicate the
-purpose of its value. In particular, the `file` setting must be set to the
-paths of one or more data files in the standard ledger or ledger XML formats
-that ledger stats will query. 
+Configuration settings are stored in `config.php` in the same directory as
+`index.php`. `config.sample.php` contains a sample set of configuration
+settings that can be modified to suit your preferences. Each setting is
+documented to indicate the purpose of its value. In particular, the `file`
+setting must be set to the paths of one or more data files in the standard
+ledger or ledger XML formats that ledger stats will query.
 
 ## Usage
 
@@ -52,5 +53,5 @@ The following dependencies are bundled with ledger stats:
 - [jQuery UI](http://jqueryui.com) 1.8.16
 - [Highcharts](http://highcharts.com) 2.1.6
 
-Note that Highcharts is _not_ free for commercial use. For more information, 
+Note that Highcharts is _not_ free for commercial use. For more information,
 refer to its [licensing terms](http://www.highcharts.com/license).
