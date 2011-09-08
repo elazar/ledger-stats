@@ -107,11 +107,15 @@ LedgerStats = {
 <script type="text/javascript" src="js/jquery-ui/js/jquery-ui-1.8.16.custom.min.js"></script>
 <script type="text/javascript" src="js/ledger-stats.js"></script>
 
+<?php
+
+    if ($_GET) {
+
+?>
 <div id="tabs">
     <ul>
 <?php
 
-    if ($_GET) {
         $postings = filter_postings($postings, $_GET);
 
         $plugins = array();
@@ -163,17 +167,20 @@ LedgerStats = {
 <?php
 
         }
-    }
 
 ?>
-<?php endif; ?>
 </div>
-
 <script type="text/javascript">
 (function($) {
     $("#tabs").tabs();
 })(jQuery);
 </script>
+<?php
+
+    }
+
+?>
+<?php endif; ?>
 
 </body>
 </html>
