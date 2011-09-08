@@ -1,6 +1,11 @@
 ledger stats is a simple browser-based frontend for ledger, a double-entry
 accounting system with a command-line reporting interface.
 
+## Demo
+
+A live demonstration of ledger stats is available at [http://matthewturland.com/ledger-stats](http://matthewturland.com/ledger-stats).
+It uses [stan.txt](https://github.com/peterkeen/Ledger-Tools-Demo/blob/master/stan.txt "stan.txt at master from peterkeen/Ledger-Tools-Demo - GitHub") from [Ledger-Tools-Demo](https://github.com/peterkeen/Ledger-Tools-Demo "peterkeen/Ledger-Tools-Demo - GitHub") by [peterkeen](https://github.com/peterkeen "peterkeen's Profile - GitHub") as its data source at the suggestion of [@SamStuck](https://twitter.com/#!/SamStuck "Sam Stuck (SamStuck) on Twitter") and [@zrail](https://twitter.com/#!/zrail "zrail (zrail) on Twitter").
+
 ## Requirements
 
 - A web server with [PHP](http://php.net) 5.3.0+ installed
