@@ -22,7 +22,7 @@ return function($postings, $config) {
             spacingRight: 20
         },
         title: {
-            text: "Total by Date"
+            text: null
         },
         xAxis: {
             type: "datetime",

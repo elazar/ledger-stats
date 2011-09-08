@@ -45,13 +45,13 @@ $config['accountLimit'] = 10;
  *
  * $config['plugin'] = array(
  *     'account_total_by_date',
- *     'month_total_by_account',
+ *     'monthly_total_by_account',
  *     'total_by_account',
  * );
  */
 $config['plugin'] = array(
     'account_total_by_date',
-    'month_total_by_account',
+    'monthly_total_by_account',
     'total_by_account',
     'total_by_date',
 );

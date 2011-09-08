@@ -33,7 +33,7 @@ return function($postings, $config) {
             plotShadow: false
         },
         title: {
-            text: "Total by Account"
+            text: null
         },
         tooltip: {
             formatter: formatter

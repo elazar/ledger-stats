@@ -17,3 +17,4 @@ body { text-align: center; }
 #account-filter label { vertical-align: top; }
 .ui-autocomplete { text-align: left; }
 form { margin-bottom: 20px; }
+.ui-tabs .ui-tabs-panel { padding: 0 0; }
