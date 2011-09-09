@@ -14,7 +14,7 @@ return function($postings, $config) {
         return ($amount / $total) >= .01;
     });
     if ($diff = $total - array_sum($data)) {
-        $data['Other'] = $diff;
+        $data['Other'] = round($diff, 2);
     }
     asort($data);
 

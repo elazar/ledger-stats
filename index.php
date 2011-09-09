@@ -97,7 +97,21 @@ Filter by date range:
 
 <script type="text/javascript">
 LedgerStats = {
-    accounts: <?php echo json_encode(get_accounts($postings)); ?>,
+    accounts: <?php
+
+    $accounts = get_accounts($postings);
+    $all = array();
+    foreach ($accounts as $account) {
+        $split = explode(':', $account);
+        foreach (range(1, count($split)) as $index) {
+            $all[implode(':', array_slice($split, 0, $index))] = true;
+        }
+    }
+    $accounts = array_keys($all);
+    sort($accounts);
+    echo json_encode($accounts);
+
+    ?>,
     accountLimit: <?php echo isset($config['accountLimit']) ? $config['accountLimit'] : 10; ?>
 };
 </script>
