@@ -142,7 +142,7 @@ LedgerStats = {
         foreach ($plugins as $plugin_name => $plugin_file) {
 
 ?>
-        <li><a href="#<?php echo htmlentities($plugin_name, ENT_QUOTES); ?>-tab"><?php echo htmlentities(ucfirst(preg_replace('/\\_([a-z])/e', '" " . strtoupper("$1")', $plugin_name)), ENT_QUOTES); ?></a></li>
+        <li><a href="#<?php echo htmlentities($plugin_name, ENT_QUOTES); ?>-tab"><?php echo htmlentities(ucfirst(preg_replace_callback('/\\_([a-z])/', function($matches) { return ' ' . strtoupper($matches[1]); }, $plugin_name)), ENT_QUOTES); ?></a></li>
 <?php
 
         }
